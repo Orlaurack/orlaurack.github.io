@@ -1,0 +1,19 @@
+<template>
+	<svg :fill="color" width="100%" height="100%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" stroke="black" stroke-width="0.5">
+		<path v-if="sign=='moon'" fill-rule="evenodd" clip-rule="evenodd" d="M12 20C13.4575 20 14.824 19.6102 16.0009 18.9292C12.6082 18.4444 10 15.5268 10 12C10 8.47323 12.6082 5.55562 16.0009 5.07076C14.824 4.38977 13.4575 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20Z"/>
+		<path v-else-if="sign=='sun'" fill-rule="evenodd" clip-rule="evenodd" d="M15.6602 6.1961L14.3923 4.00006L12.1962 5.26797L10 4L8.73209 6.1961H6.19617V8.7321L4 10.0001L5.26794 12.1962L4.00001 14.3923L6.19617 15.6603V18.1961H8.73199L10 20.3924L12.1962 19.1244L14.3923 20.3923L15.6603 18.1961H18.1962V15.6603L20.3923 14.3924L19.1243 12.1962L20.3923 10L18.1962 8.73205V6.1961H15.6602Z"/>
+		<path v-else-if="sign=='hearth'" d="M18.6274 13.2038L12 20L5.37258 13.2038C3.54247 11.3271 3.54247 8.28428 5.37258 6.40755C7.20269 4.53083 10.1699 4.53082 12 6.40754C13.8301 4.53082 16.7973 4.53082 18.6274 6.40754C20.4575 8.28427 20.4575 11.327 18.6274 13.2038Z"/>
+		<path v-else-if="sign=='triangle'" d="M12.1603 4L20.8205 19H3.5L12.1603 4Z"/>
+		<path v-else-if="sign=='square'" d="M5 5H19V19H5V5Z"/>
+		<path v-else-if="sign=='star'" d="M12 3L14.0206 9.21885H20.5595L15.2694 13.0623L17.2901 19.2812L12 15.4377L6.70993 19.2812L8.73056 13.0623L3.44049 9.21885H9.97937L12 3Z"/>
+		<circle v-else-if="sign=='circle'" cx="12" cy="12" r="8"/>
+		<path v-else-if="sign=='joker'" d="M6 6H18V18H6V6Z" fill="#000" />
+		<path v-else d="M3 3H21V21H3V3Z" fill="#ffffff44"/>
+	</svg>
+</template>
+
+<script>
+export default {
+	props: ['color', 'sign']
+}
+</script>
