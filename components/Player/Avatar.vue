@@ -28,8 +28,6 @@ export default {
 </script>
 
 <style lang="sass">
-:root
-	--selection-color: #48f
 
 .avatar
 	height: 300px
@@ -44,9 +42,18 @@ export default {
 		width: 100px
 		height: 120px
 	&.active
-		background: radial-gradient(circle at center, var(--selection-color) 0%, transparent 50%)
-		padding: 80px 
-		margin: -80px
-		border-radius: 50%
+		animation: glow 1000ms infinite ease-in-out
+		border-radius: 100%
+		
    
+@keyframes glow 
+	0%
+		box-shadow: 0 0 50px 2px var(--turn-color),inset 0 0 50px transparent
+		outline: var(--turn-color) 2px solid
+	50%
+		box-shadow: 0 0 50px 2px transparent, inset 0 0 50px var(--turn-color)
+		outline: var(--turn-color) 2px solid
+	100%
+		box-shadow: 0 0 50px 2px var(--turn-color),inset 0 0 50px transparent
+		outline: var(--turn-color) 2px solid
 </style>

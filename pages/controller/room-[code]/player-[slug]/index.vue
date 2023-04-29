@@ -1,5 +1,5 @@
 <template>
-	<div class="controller-container" :style="{background: color}" @touchstart="tripleTouch">
+	<div class="controller-container" :class="{myTurn}" :style="{background: color}" @touchstart="tripleTouch">
 		<ControllerCross v-if="controllerType == 'cross'" @changeDirection="cross"/>
 		<ControllerJoystick v-else-if="controllerType == 'joystick'" @changeDirection="joystick"/>
 		<ControllerSign v-else-if="controllerType == 'sign'" @select="sign" :myTurn="myTurn"/>
@@ -45,14 +45,9 @@ export default {
 				elem.msRequestFullscreen();
 			}
 		},
-		resetTouch(){
-			setTimeout(function(){
-		    this.touchCount = 0
-		  }, 1000)
-		},
 		tripleTouch(){
-			this.resetTouch()
 			this.touchCount += 1
+			setTimeout(() => this.touchCount = 0, 700)
 		  if (this.touchCount === 3) {
 		    this.touchCount = 0
 				this.fullScreen()
@@ -96,8 +91,19 @@ export default {
 <style lang="sass">
 .controller-container
 	position: absolute
-	width: 100%
-	height: 100%
+	width: calc(100% - 0px)
+	height: calc(100% - 0px)
+	transition: 500ms filter
+	//filter: grayscale(80%) brightness(80%)	
+	&.myTurn
+		animation: glow 1000ms infinite ease-in-out
+		filter: grayscale(0%) brightness(100%)	
 
-
+@keyframes glow 
+	0%
+		box-shadow: inset 0 0 100px var(--turn-color)
+	50%
+		box-shadow: inset 0 0 0px var(--turn-color)
+	100%
+		box-shadow: inset 0 0 100px var(--turn-color)
 </style>

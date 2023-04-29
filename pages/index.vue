@@ -1,6 +1,6 @@
 <template>
 	<div class="index">
-		<h1>Klarucora</h1>
+		<h1>Bienvenux</h1>
 		<NuxtLink @click="create_room">Créer une partie</NuxtLink>
 	</div>
 </template>
@@ -54,7 +54,6 @@ export default {
 				}
 			})
 			router.push(`/room/${code}`) 
-
 		}
   },
 }

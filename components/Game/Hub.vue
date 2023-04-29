@@ -20,7 +20,7 @@ export default {
 	data (){
 		return{
 			playersPositions: {},
-			games: {sign: 0, anus: 0}
+			games: {sign: 0}
 		}
 	},
 	methods:{
@@ -30,7 +30,7 @@ export default {
 	    var step = 360 / number
 	    for (var i = 0; i < number; i++) {
         coordinates.push({
-          x: (window.innerWidth/2) + Math.cos(angle * Math.PI / 180)*100,
+          x: (window.innerWidth/2) + Math.cos(angle * Math.PI / 180)*100 -80,
           y: (window.innerHeight/2) + Math.sin(angle * Math.PI / 180)*100
         })
         angle += step

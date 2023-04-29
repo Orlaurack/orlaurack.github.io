@@ -1,15 +1,15 @@
 <template>
 	<div class="joystick" 
-		@mousedown="moveStart"
-		@touchstart="moveStart"
-		@mousemove="move"
-		@touchmove="move"
+		@mousedown="moveStart($event.clientX, $event.clientY)"
+		@touchstart="moveStart($event.touches[0].clientX, $event.touches[0].clientY)"
+		@mousemove="move($event.clientX, $event.clientY)"
+		@touchmove="move($event.touches[0].clientX, $event.touches[0].clientY)"
 		@mouseup="moveStop"
 		@touchend="moveStop"
 		@touchcancel="moveStop"
 		:class="active"
 	>
-		<div class="zone" :style="{top: yStart+'px', left: xStart+'px'}">
+		<div class="zone" :class="{active}" :style="{top: yStart+'px', left: xStart+'px'}">
 		</div>
 		<div class="circle" :style="{top: yCircle+'px', left: xCircle+'px'}">
 		</div>
@@ -25,23 +25,24 @@ export default {
 			yStart: window.innerHeight/2,
 			xCircle: window.innerWidth/2,
 			yCircle: window.innerHeight/2,
-			active: false
+			active: false,
+			log: null
 		}
 	},
 	methods:{
-		moveStart(joystick){
-			this.yStart = joystick.clientY
-			this.xStart = joystick.clientX
-			this.yCircle = joystick.clientY
-			this.xCircle = joystick.clientX
+
+		moveStart(x, y){
+			this.yStart = y
+			this.xStart = x
+			this.yCircle = y
+			this.xCircle = x
 			this.active = true
 		},
-		move(joystick){
+		move(eventX, eventY){
 			if(this.active){
-				console.log(joystick)
 				
-				const y = this.yStart - joystick.clientY
-				const x = this.xStart - joystick.clientX
+				const y = this.yStart - eventY
+				const x = this.xStart - eventX
 
 				var distance = Math.min(Math.sqrt(x * x + y * y), 100);
 			  var direction = Math.atan2(y, x) * 180 / Math.PI;
@@ -72,17 +73,20 @@ export default {
 	height: 100%
 
 	.zone
-		width: 150px
-		height: 150px
+		width: 125px
+		height: 125px
+		outline: 50px solid #fff3
 		position: absolute
 		top: 50vh
 		left: 50vw
 		border-radius: 100%
 		transform: translate(-50%, -50%)
-		background-color: #fff3
+		background-color: #fff6
 		pointer-events: none
-	&.active .zone
-		background-color: #fff5
+		transition: left 100ms, top 100ms
+		&.active
+			outline-color: #fff2
+			background-color: #fff4
 
 	.circle
 		width: 100px
@@ -94,5 +98,9 @@ export default {
 		transform: translate(-50%, -50%)
 		background-color: black
 		pointer-events: none
+		transition: left 50ms, top 50ms
+
+	pre
+		position: absolute
 
 </style>

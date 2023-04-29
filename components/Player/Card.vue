@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .player-card
 	display: flex
 	flex-direction: column
@@ -24,4 +24,7 @@ export default {
 	border-radius: 10px
 	margin: 20px
 	padding-top:20px
+	h2
+		text-align: center
+		
 </style>

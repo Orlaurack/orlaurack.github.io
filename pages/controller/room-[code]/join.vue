@@ -1,7 +1,7 @@
 <template>
 	<div class="join-form">
 		<h1>Salon {{ $route.params.code }}</h1>
-		<label id="input-name">Nom <input type="text" name="name" ref="name"></label>
+		<label @click="focus_name" id="input-name">Nom : <span contenteditable="true" name="name" id="name" ref="name"></span></label>
 		<input id="join-btn" @click="joinRoom" type="submit" value="Rejoindre le salon">
 	</div>
 </template>
@@ -18,7 +18,7 @@ export default {
 			return string.normalize( 'NFD' ).replace( /[\u0300-\u036f]/g, '' ).toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
 		},
 		joinRoom() {
-			const name = this.cleanString(this.$refs.name.value)
+			const name = this.cleanString(this.$refs.name.innerText)
 			if(name.length){
 				const rtdb = useRTDB()
 				const route = useRoute()
@@ -32,7 +32,13 @@ export default {
 					}
 				})
 			}
+		},
+		focus_name(){
+			this.$refs.name.focus()
 		}
+	},
+	mounted(){
+		this.focus_name()
 	}
 }
 </script>
@@ -50,14 +56,39 @@ export default {
 		gap: 10px
 		height: 30px
 		align-items: center
-		input
+		justify-content: center
+		color: #aaa
+		font-size: 24px
+		span#name
+			color: #000
 			height: 30px
-			flex: 1
+			min-width: 10px
 			border: none
-			border-bottom: #aaa 1px solid
-			font-size: 20px
+			outline: #0002 3px double
+			padding: 10px 12px
 			&:focus
-				outline: none
+				outline-color: black
 	#join-btn
-		height: 40px
+		padding: 20px
+		min-width: 50%
+		margin: 0 auto 
+		border: 0px solid #0004
+		font-family: "Kanit"
+		font-weight: 900
+		font-size: 24px
+		border-radius: 100px
+		color: #6666dd
+		cursor: pointer
+		background: linear-gradient(to right, #ff6666, #dddd66, #66ff66)
+		animation: glow linear infinite 5000ms
+		transition: 200ms
+		&:hover, &:active
+			transform: scale(120%)
+		
+
+@keyframes glow
+	0%
+		filter: hue-rotate(0deg)
+	100%
+		filter: hue-rotate(360deg)
 </style>

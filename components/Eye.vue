@@ -1,5 +1,5 @@
 <template>
-	<div class="eye" :class="{small}">
+	<div class="eye" :class="{small}" :style="{transform: `rotateX(${h}deg)`}">
 	  <svg class="iris" :style="{color, transform: `translate(${x}%, ${y}%)`}" viewBox="0 0 250 300" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<template v-if="name=='kawaii'">
 				<rect width="250" height="300" fill="white"/>
@@ -118,7 +118,8 @@ export default{
 	data() {
 		return {
 			x: 0,
-			y: 0
+			y: 0,
+			h: 0
 		} 
 	},
 	computed: {
@@ -139,10 +140,22 @@ export default{
 					this.setDirection()
 				}, 2000+(Math.random()*500))
 			}, 1000)
+		},
+		setBlink(){
+			
+			this.h = 90
+			
+			setTimeout(() => {
+				this.h = 0
+				setTimeout(()=>{
+					this.setBlink()
+				}, 10000+(Math.random()*10000))
+			}, 200)
 		}
 	},
 	mounted(){
 		this.setDirection()
+		this.setBlink()
 
 	}
 }
@@ -152,10 +165,10 @@ export default{
 
 .eye
 	margin-top: -300px
-	animation: blink-eye 25s linear infinite
 	clip-path: path("M90.1604 98.6882C107.16 80.1882 141.66 80.6882 157.66 98.6882C183.148 127.361 192.827 170.116 169.66 196.188C146.833 221.878 104.913 221.493 81.6599 196.188C58.1674 170.622 64.3 126.832 90.1604 98.6882Z")
 	height: 300px
 	width: 250px
+	transition: transform 100ms
 	&.small
 		margin-top: -120px
 		height: 120px

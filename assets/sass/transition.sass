@@ -1,0 +1,31 @@
+
+
+.page-leave
+	filter: none
+	transform: none
+
+.page-leave-active
+	transition-timing-function: ease-in-out
+	transition-duration: 2000ms
+
+.page-leave-to // last step
+	filter: hue-rotate(360deg) contrast(0%) brightness(200%)
+	transform: scale(150%)
+
+
+
+.page-enter-active
+	transition-timing-function: ease-in-out
+	transition-duration: 1000ms
+	transform: scale(20%) translateY(-300px) 
+	opacity: 0
+
+
+//.page-enter // first step
+	//transform: rotate(1000deg)
+	//opacity: 0
+
+.page-enter-to
+	border-radius: 0%
+	transform: none
+	opacity: 1
